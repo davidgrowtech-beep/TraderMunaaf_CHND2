@@ -26,17 +26,12 @@ h1{font-size:25px;line-height:1.25;margin-top:12px;font-weight:800;color:var(--y
 .lead{margin-top:8px;color:var(--muted);font-size:13.5px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;margin-top:16px}
 .card h2{font-size:15px;color:var(--yellow);margin-bottom:10px;font-weight:700}
-label{display:block;font-size:13px;color:var(--muted);margin:10px 0 5px}
-input{width:100%;background:#0f0f0f;border:1.5px solid #333;color:#fff;border-radius:12px;padding:13px 14px;font-size:16px;font-family:inherit;outline:none;transition:border .2s}
-input:focus{border-color:var(--yellow)}
-input.ok{border-color:var(--green)}
-input.bad{border-color:var(--red)}
 .hint{display:none;margin-top:10px;font-size:12.5px;color:#ff9a9a;text-align:center}
 .hint.show{display:block}
 .cta{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:14px;padding:16px 12px;border-radius:14px;text-decoration:none;font-weight:800;font-size:16px;color:#fff;background:#3a3a3a;border:2px solid #555;text-align:center;line-height:1.3;transition:all .25s}
 .cta.ready{background:linear-gradient(135deg,#16a34a,#22c55e);border-color:#86efac;color:#04200f;animation:blink 1s steps(2,jump-none) infinite;box-shadow:0 0 22px rgba(34,197,94,.6)}
 @keyframes blink{0%{filter:brightness(1);transform:scale(1)}50%{filter:brightness(1.35);transform:scale(1.025)}100%{filter:brightness(1);transform:scale(1)}}
-.cta.locked{opacity:.55;cursor:not-allowed;animation:none;box-shadow:none}
+.cta.locked{opacity:.65;cursor:not-allowed;animation:none;box-shadow:none}
 .cta svg{width:22px;height:22px;flex:none}
 .note{margin-top:8px;font-size:12px;color:var(--muted);text-align:center}
 ul.ben{list-style:none}
@@ -49,6 +44,8 @@ ul.ben b{color:var(--yellow);flex:none}
 .disc{margin-top:18px;font-size:11.5px;color:#8d8d8d;text-align:center;line-height:1.6}
 .ad{margin-top:14px;text-align:center;font-size:12px}
 .ad a{color:var(--yellow);text-decoration:none;font-weight:600}
+/* honeypot: invisible to humans, bots that click every link get flagged */
+.hp{position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;opacity:0;overflow:hidden}
 @media (prefers-reduced-motion:reduce){.logo,.cta.ready{animation:none}}
 </style>
 </head>
@@ -66,12 +63,8 @@ ul.ben b{color:var(--yellow);flex:none}
 
   <section class="card" id="formCard">
     <h2 class="te">📲 Telegram లో ఉచితంగా చేరండి<br><span style="font-weight:400;color:var(--muted);font-size:12.5px">Join the channel for free</span></h2>
-    <label class="te" for="nm">మీ పేరు / Your Name</label>
-    <input id="nm" type="text" autocomplete="name" maxlength="40" placeholder="పేరు / Name">
-    <label class="te" for="ag">మీ వయస్సు / Your Age</label>
-    <input id="ag" type="tel" inputmode="numeric" autocomplete="off" maxlength="2" placeholder="వయస్సు / Age (18+)">
-    <p id="hint" class="hint te">⚠️ ముందు పేరు &amp; వయస్సు నమోదు చేయండి (18+) / Please enter your name &amp; age (18+) first</p>
-    <a id="cta1" class="cta locked" href="#" rel="noopener" data-cta="1"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9.8 15.6l-.4 4.2c.6 0 .9-.3 1.2-.6l2.9-2.7 6 4.4c1.1.6 1.9.3 2.2-1L24 4.1c.4-1.6-.6-2.3-1.7-1.9L1.5 10.3c-1.6.6-1.6 1.5-.3 1.9l5.3 1.6 12.3-7.8c.6-.4 1.1-.2.7.2z"/></svg><span class="te lbl">📲 Telegram లో జాయిన్ అవ్వండి / Join Free</span></a>
+    <a id="cta1" class="cta locked" href="#" rel="noopener" data-cta="1"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9.8 15.6l-.4 4.2c.6 0 .9-.3 1.2-.6l2.9-2.7 6 4.4c1.1.6 1.9.3 2.2-1L24 4.1c.4-1.6-.6-2.3-1.7-1.9L1.5 10.3c-1.6.6-1.6 1.5-.3 1.9l5.3 1.6 12.3-7.8c.6-.4 1.1-.2.7.2z"/></svg><span class="te lbl">⏳ చెక్ చేస్తున్నాం… / Verifying…</span></a>
+    <p id="hint" class="hint te">⏳ ఒక్క క్షణం ఆగండి, బటన్ రెడీ అవుతోంది / Please wait a moment, the button is getting ready</p>
     <p class="note te">Telegram లో “REQUEST TO JOIN” నొక్కడం మర్చిపోవద్దు / Don't forget to tap “REQUEST TO JOIN”</p>
   </section>
 
@@ -91,85 +84,106 @@ ul.ben b{color:var(--yellow);flex:none}
       <li>గ్రీన్ Telegram బటన్ నొక్కండి<br><small style="color:var(--muted)">Tap the green Telegram button</small></li>
       <li>Telegram లో “REQUEST TO JOIN” నొక్కండి<br><small style="color:var(--muted)">Tap “REQUEST TO JOIN” inside Telegram</small></li>
     </ol>
-    <a id="cta2" class="cta locked" href="#" rel="noopener" data-cta="2"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9.8 15.6l-.4 4.2c.6 0 .9-.3 1.2-.6l2.9-2.7 6 4.4c1.1.6 1.9.3 2.2-1L24 4.1c.4-1.6-.6-2.3-1.7-1.9L1.5 10.3c-1.6.6-1.6 1.5-.3 1.9l5.3 1.6 12.3-7.8c.6-.4 1.1-.2.7.2z"/></svg><span class="te lbl">📲 Telegram లో జాయిన్ అవ్వండి / Join Free</span></a>
+    <a id="cta2" class="cta locked" href="#" rel="noopener" data-cta="2"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9.8 15.6l-.4 4.2c.6 0 .9-.3 1.2-.6l2.9-2.7 6 4.4c1.1.6 1.9.3 2.2-1L24 4.1c.4-1.6-.6-2.3-1.7-1.9L1.5 10.3c-1.6.6-1.6 1.5-.3 1.9l5.3 1.6 12.3-7.8c.6-.4 1.1-.2.7.2z"/></svg><span class="te lbl">⏳ చెక్ చేస్తున్నాం… / Verifying…</span></a>
   </section>
 
   <p class="disc te">⚠️ ఇది కేవలం విద్యా ప్రయోజనాల కోసం మాత్రమే. పెట్టుబడి సలహా కాదు. స్టాక్ మార్కెట్ లో రిస్క్ ఉంటుంది, లాభాలకు ఎలాంటి హామీ లేదు.<br>Educational purpose only. Not investment advice. Market investments carry risk and no profit is guaranteed.</p>
   <p class="ad">Ad by: <a href="https://t.me/srsagency" rel="noopener">SRS Marketing Agency</a></p>
+  <a id="hp" class="hp" href="#" tabindex="-1" aria-hidden="true" rel="nofollow">Join</a>
 </div>
 
 <script>
 /* ===== CONFIG ===== */
 var CFG={
   pixel:'1897983794516790',
-  tg:'https://t.me/+gPDWZTIGSvxkODY1',
+  /* Telegram link is stored reversed and rebuilt only on a verified tap (not visible in href / plain HTML) */
+  tgRev:'1YDOkxvSGITZWDPg+/em.t//:sptth',
   event:'Lead',
   page:'Learn Enhanced Skills with Trader Munaaf',
-  minDwellMs:1500
+  unlockMs:3000,      /* visible time needed before button unlocks */
+  minTapAgeMs:3000,   /* a tap before this many ms from page load is rejected */
+  tapWindowMs:2000,   /* click must follow a real touch/press within this window */
+  redirectDelayMs:250 /* lets the Lead beacon leave before Telegram opens */
 };
+var TG=CFG.tgRev.split('').reverse().join('');
+
 /* ===== Meta Pixel (no auto PageView: qualified PageView is fired below) ===== */
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
 fbq('init',CFG.pixel);
 
 (function(){
   var ua=navigator.userAgent||'';
-  var t0=Date.now(),interacted=false,focusedSecs=0,pvFired=false;
+  var t0=Date.now(),interacted=false,visibleMs=0,focusedSecs=0,pvFired=false;
+  var unlocked=false,lastTap=0,going=false,botFlag=false;
   var $=function(id){return document.getElementById(id)};
   var ctas=[$('cta1'),$('cta2')];
+  var hint=$('hint');
+  var isMobileUA=/Android|iPhone|iPad|iPod|Mobile/i.test(ua);
 
-  /* bot / automation detection */
-  var isBot=(function(){
+  /* ---------- Layer 1: bot / automation detection ---------- */
+  function detectBot(){
     try{
       if(navigator.webdriver)return true;
-      if(/HeadlessChrome|PhantomJS|Puppeteer|Selenium|Playwright|Lighthouse|bot|crawl|spider|facebookexternalhit|Facebot|Bytespider/i.test(ua))return true;
-      if(window.callPhantom||window._phantom||window.__nightmare)return true;
+      if(/HeadlessChrome|PhantomJS|Puppeteer|Selenium|Playwright|Lighthouse|bot|crawl|spider|facebookexternalhit|Facebot|Bytespider|curl|wget|python|axios|node-fetch/i.test(ua))return true;
+      if(window.callPhantom||window._phantom||window.__nightmare||window.domAutomation||window.domAutomationController)return true;
+      if(!navigator.languages||navigator.languages.length===0)return true;
+      if(window.outerWidth===0&&window.outerHeight===0)return true;
+      if(!screen.width||!screen.height)return true;
+      if(!isMobileUA&&/Chrome/i.test(ua)&&navigator.plugins&&navigator.plugins.length===0)return true; /* old headless desktop */
     }catch(e){}
     return false;
-  })();
+  }
+  var isBot=detectBot();
 
-  /* in-app browser handling (Facebook / Instagram) */
+  /* honeypot: invisible link, only scripts click/focus it */
+  var hp=$('hp');
+  hp.addEventListener('click',function(e){e.preventDefault();botFlag=true;render()});
+  hp.addEventListener('focus',function(){botFlag=true;render()});
+  function blocked(){return isBot||botFlag}
+
+  /* ---------- in-app browser handling (Facebook / Instagram) ---------- */
   var inApp=/FBAN|FBAV|FB_IAB|FBIOS|Instagram/i.test(ua);
   var isAndroid=/Android/i.test(ua);
-  var finalHref=CFG.tg;
+  var finalHref=TG;
   if(inApp&&isAndroid){
-    finalHref='intent://'+CFG.tg.replace(/^https?:\/\//,'')+'#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url='+encodeURIComponent(CFG.tg)+';end';
+    finalHref='intent://'+TG.replace(/^https?:\/\//,'')+'#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url='+encodeURIComponent(TG)+';end';
   }else if(inApp){
     $('iab').style.display='block';
   }
 
-  /* human interaction signals (trusted events only) */
-  ['touchstart','pointerdown','mousedown','keydown','scroll','mousemove'].forEach(function(ev){
+  /* ---------- Layer 2: human interaction (trusted events only) ---------- */
+  ['touchstart','pointerdown','mousedown','keydown','scroll','mousemove','touchmove'].forEach(function(ev){
     window.addEventListener(ev,function(e){if(e.isTrusted)interacted=true},{passive:true});
   });
 
-  /* ===== Gate: valid name + age required before any Telegram button works ===== */
-  var nm=$('nm'),ag=$('ag'),hint=$('hint');
-  function nameOk(){var v=nm.value.trim();return v.length>=2&&/[A-Za-z\u0C00-\u0C7F\u0900-\u097F\u0600-\u06FF\u0A80-\u0AFF]{2,}/.test(v)}
-  function ageOk(){var a=parseInt(ag.value,10);return /^\d{2}$/.test(ag.value.trim())&&a>=18&&a<=70}
-  function ready(){return !isBot&&nameOk()&&ageOk()}
-
+  /* ---------- Layer 3: button stays locked until verified (time visible + real interaction) ---------- */
+  var READY_LABEL='📲 Telegram లో జాయిన్ అవ్వండి / Join Free';
+  function setLabel(t){ctas.forEach(function(a){a.querySelector('.lbl').textContent=t})}
   function render(){
-    var r=ready();
-    nm.classList.toggle('ok',nameOk());nm.classList.toggle('bad',nm.value.length>0&&!nameOk());
-    ag.classList.toggle('ok',ageOk());ag.classList.toggle('bad',ag.value.length>0&&!ageOk());
+    var r=unlocked&&!blocked();
     ctas.forEach(function(a){
-      if(r){
-        a.setAttribute('href',finalHref);
-        a.classList.remove('locked');a.classList.add('ready');
-      }else{
-        a.setAttribute('href','#');
-        a.classList.remove('ready');a.classList.add('locked');
-      }
+      a.setAttribute('href','#'); /* real link never exposed in href: scraper/direct-link clicks get nothing */
+      if(r){a.classList.remove('locked');a.classList.add('ready')}
+      else{a.classList.remove('ready');a.classList.add('locked')}
     });
-    if(r)hint.classList.remove('show');
+    if(r){setLabel(READY_LABEL);hint.classList.remove('show')}
+    else if(visibleMs>=CFG.unlockMs&&!interacted){setLabel('👆 స్క్రీన్ ను తాకండి / Touch the screen to continue')}
+    else{
+      var left=Math.max(1,Math.ceil((CFG.unlockMs-visibleMs)/1000));
+      setLabel('⏳ చెక్ చేస్తున్నాం… '+left+'s / Verifying…');
+    }
   }
-  ag.addEventListener('input',function(){ag.value=ag.value.replace(/\D/g,'').slice(0,2);render()});
-  nm.addEventListener('input',render);
   render();
 
-  /* qualified PageView: interaction + 3s, or focused/visible 8s */
   setInterval(function(){
-    if(isBot||pvFired)return;
+    if(document.visibilityState==='visible'){visibleMs+=250}
+    if(!unlocked&&!blocked()&&interacted&&visibleMs>=CFG.unlockMs){unlocked=true}
+    render();
+  },250);
+
+  /* qualified PageView: interaction + 3s, or focused/visible 8s (bots never reach this) */
+  setInterval(function(){
+    if(blocked()||pvFired)return;
     if(document.visibilityState==='visible'&&document.hasFocus())focusedSecs+=0.5;
     var el=Date.now()-t0;
     if((interacted&&el>=3000)||focusedSecs>=8){
@@ -178,17 +192,36 @@ fbq('init',CFG.pixel);
     }
   },500);
 
-  /* CTA click: Lead only on a trusted tap; navigation stays native (no preventDefault, no delay) */
-  function onCta(e){
-    if(!e.isTrusted||isBot){e.preventDefault();return}
-    if(!ready()){e.preventDefault();hint.classList.add('show');(nameOk()?ag:nm).focus();return}
+  /* ---------- Layer 4: the tap itself must be a real human press on the button ---------- */
+  ctas.forEach(function(a){
+    ['pointerdown','touchstart','mousedown'].forEach(function(ev){
+      a.addEventListener(ev,function(e){if(e.isTrusted)lastTap=Date.now()},{passive:true});
+    });
+    a.addEventListener('keydown',function(e){if(e.isTrusted&&(e.key==='Enter'||e.key===' '))lastTap=Date.now()});
+  });
+
+  function leadOnce(){
     var k='leadFired_'+CFG.pixel,fired=false;
-    try{fired=sessionStorage.getItem(k)==='1'}catch(x){}
-    if(!fired){
-      try{sessionStorage.setItem(k,'1')}catch(x){}
-      var id='ld_'+Date.now()+'_'+Math.random().toString(36).slice(2,9);
-      try{fbq('track',CFG.event,{content_name:CFG.page},{eventID:id})}catch(x){}
-    }
+    try{fired=localStorage.getItem(k)==='1'||sessionStorage.getItem(k)==='1'}catch(x){}
+    if(fired)return; /* one Lead per device, repeated taps never inflate Meta numbers */
+    try{localStorage.setItem(k,'1')}catch(x){}
+    try{sessionStorage.setItem(k,'1')}catch(x){}
+    var id='ld_'+Date.now()+'_'+Math.random().toString(36).slice(2,9);
+    try{fbq('track',CFG.event,{content_name:CFG.page},{eventID:id})}catch(x){}
+  }
+
+  function onCta(e){
+    e.preventDefault();
+    if(!e.isTrusted||blocked())return;                       /* synthetic click / bot: nothing happens */
+    if(!unlocked){hint.classList.add('show');return}          /* too early */
+    var now=Date.now();
+    if(now-t0<CFG.minTapAgeMs)return;                         /* impossibly fast */
+    if(!lastTap||now-lastTap>CFG.tapWindowMs)return;          /* click without a real press before it */
+    if(going)return;                                          /* double-tap guard */
+    going=true;
+    leadOnce();
+    setTimeout(function(){window.location.href=finalHref},CFG.redirectDelayMs);
+    setTimeout(function(){going=false},4000);                 /* allow retry if user comes back */
   }
   ctas.forEach(function(a){a.addEventListener('click',onCta)});
 })();
